@@ -162,43 +162,6 @@ export default function VerifyEmail({ status }) {
                     Awaiting email verification
                 </span>
             </div>
-
-            <style type="text/css">{`
-                .btn-primary {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                }
-                
-                .btn-primary:hover {
-                    background-color: #7C3AED;
-                    border-color: #7C3AED;
-                }
-                
-                .btn-primary:disabled {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                    opacity: 0.65;
-                }
-                
-                .btn-outline-secondary {
-                    color: #6c757d;
-                    border-color: #dee2e6;
-                }
-                
-                .btn-outline-secondary:hover {
-                    background-color: #f8f9fa;
-                    color: #8B5CF6;
-                    border-color: #8B5CF6;
-                }
-                
-                .bg-light {
-                    background-color: #f8f9fa !important;
-                }
-                
-                .rounded-3 {
-                    border-radius: 1rem !important;
-                }
-            `}</style>
         </GuestLayout>
     );
 }

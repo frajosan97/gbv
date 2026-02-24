@@ -33,9 +33,9 @@ export default function ConfirmPassword() {
             {/* Security Alert */}
             <Alert
                 variant="warning"
-                className="mb-4 d-flex align-items-center gap-2 bg-warning bg-opacity-10 border-warning border-opacity-25"
+                className="mb-4 d-flex align-items-center gap-2"
             >
-                <Shield className="text-warning flex-shrink-0" size={16} />
+                <Shield className="flex-shrink-0" size={16} />
                 <span className="small">
                     <strong>Secure Area:</strong> This is a protected section of
                     the application. Please confirm your password before
@@ -51,7 +51,7 @@ export default function ConfirmPassword() {
                         Password
                     </Form.Label>
                     <InputGroup>
-                        <InputGroup.Text className="bg-light border-end-0">
+                        <InputGroup.Text className="bg-light">
                             <Lock size={16} className="text-secondary" />
                         </InputGroup.Text>
                         <Form.Control
@@ -60,17 +60,14 @@ export default function ConfirmPassword() {
                             onChange={(e) =>
                                 setData("password", e.target.value)
                             }
-                            className="border-start-0 bg-light"
                             placeholder="Enter your password"
                             autoComplete="current-password"
-                            isFocused={true}
+                            autoFocus
                             isInvalid={!!errors.password}
                         />
                         <Button
-                            variant="link"
-                            className="bg-light border text-secondary text-decoration-none"
+                            variant="outline-secondary"
                             onClick={() => setShowPassword(!showPassword)}
-                            style={{ zIndex: 5 }}
                         >
                             {showPassword ? (
                                 <EyeSlash size={16} />
@@ -80,12 +77,9 @@ export default function ConfirmPassword() {
                         </Button>
                     </InputGroup>
                     {errors.password && (
-                        <Form.Control.Feedback
-                            type="invalid"
-                            className="d-block small mt-1"
-                        >
+                        <Form.Text className="text-danger small mt-1 d-block">
                             {errors.password}
-                        </Form.Control.Feedback>
+                        </Form.Text>
                     )}
                 </Form.Group>
 
@@ -116,7 +110,7 @@ export default function ConfirmPassword() {
                     )}
                 </Button>
 
-                {/* Back to Dashboard Link (if applicable) */}
+                {/* Back to Dashboard Link */}
                 <div className="text-center">
                     <Link
                         href={route("dashboard")}
@@ -160,35 +154,6 @@ export default function ConfirmPassword() {
                     Session security verification required
                 </span>
             </div>
-
-            <style type="text/css">{`
-                .form-control:focus {
-                    border-color: #8B5CF6;
-                    box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25);
-                }
-                
-                .input-group-text {
-                    background-color: #f8f9fa;
-                }
-                
-                .btn-primary {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                }
-                
-                .btn-primary:hover {
-                    background-color: #7C3AED;
-                    border-color: #7C3AED;
-                }
-                
-                .btn-link {
-                    color: #6c757d;
-                }
-                
-                .btn-link:hover {
-                    color: #8B5CF6;
-                }
-            `}</style>
         </GuestLayout>
     );
 }

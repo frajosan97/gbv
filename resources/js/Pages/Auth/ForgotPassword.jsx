@@ -58,9 +58,9 @@ export default function ForgotPassword({ status }) {
             {/* Info Message */}
             <Alert
                 variant="info"
-                className="mb-4 small d-flex align-items-center gap-2 bg-info bg-opacity-10 border-info border-opacity-25"
+                className="mb-4 small d-flex align-items-center gap-2"
             >
-                <Shield className="text-info flex-shrink-0" size={16} />
+                <Shield className="flex-shrink-0" size={16} />
                 <span>
                     <strong>Security Notice:</strong> Enter your registered
                     email address and we'll send you a secure password reset
@@ -76,14 +76,13 @@ export default function ForgotPassword({ status }) {
                         Email Address
                     </Form.Label>
                     <InputGroup>
-                        <InputGroup.Text className="bg-light border-end-0">
+                        <InputGroup.Text className="bg-light">
                             <Envelope size={16} className="text-secondary" />
                         </InputGroup.Text>
                         <Form.Control
                             type="email"
                             value={data.email}
                             onChange={(e) => setData("email", e.target.value)}
-                            className="border-start-0 bg-light"
                             placeholder="gv.officer@kitui.go.ke"
                             autoComplete="username"
                             autoFocus
@@ -91,12 +90,9 @@ export default function ForgotPassword({ status }) {
                         />
                     </InputGroup>
                     {errors.email && (
-                        <Form.Control.Feedback
-                            type="invalid"
-                            className="d-block small mt-1"
-                        >
+                        <Form.Text className="text-danger small mt-1 d-block">
                             {errors.email}
-                        </Form.Control.Feedback>
+                        </Form.Text>
                     )}
                 </Form.Group>
 
@@ -171,33 +167,6 @@ export default function ForgotPassword({ status }) {
                     Secure password reset process
                 </span>
             </div>
-
-            <style type="text/css">{`
-                .form-control:focus {
-                    border-color: #8B5CF6;
-                    box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25);
-                }
-                
-                .input-group-text {
-                    background-color: #f8f9fa;
-                }
-                
-                .btn-primary {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                }
-                
-                .btn-primary:hover {
-                    background-color: #7C3AED;
-                    border-color: #7C3AED;
-                }
-                
-                .btn-primary:disabled {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                    opacity: 0.65;
-                }
-            `}</style>
         </GuestLayout>
     );
 }

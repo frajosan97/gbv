@@ -1,5 +1,12 @@
 import { Head, Link, useForm } from "@inertiajs/react";
-import { Form, Button, Alert, Spinner, InputGroup } from "react-bootstrap";
+import {
+    Form,
+    Button,
+    Alert,
+    Spinner,
+    InputGroup,
+    ProgressBar,
+} from "react-bootstrap";
 import {
     Envelope,
     Lock,
@@ -68,9 +75,9 @@ export default function ResetPassword({ token, email }) {
             {/* Info Message */}
             <Alert
                 variant="info"
-                className="mb-4 small d-flex align-items-center gap-2 bg-info bg-opacity-10 border-info border-opacity-25"
+                className="mb-4 small d-flex align-items-center gap-2"
             >
-                <Shield className="text-info flex-shrink-0" size={16} />
+                <Shield className="flex-shrink-0" size={16} />
                 <span>
                     <strong>Password Requirements:</strong> Minimum 8 characters
                     with at least one uppercase letter, one number, and one
@@ -86,14 +93,13 @@ export default function ResetPassword({ token, email }) {
                         Email Address
                     </Form.Label>
                     <InputGroup>
-                        <InputGroup.Text className="bg-light border-end-0">
+                        <InputGroup.Text className="bg-light">
                             <Envelope size={16} className="text-secondary" />
                         </InputGroup.Text>
                         <Form.Control
                             type="email"
                             value={data.email}
                             onChange={(e) => setData("email", e.target.value)}
-                            className="border-start-0 bg-light"
                             placeholder="gv.officer@kitui.go.ke"
                             autoComplete="username"
                             readOnly={!!email}
@@ -101,12 +107,9 @@ export default function ResetPassword({ token, email }) {
                         />
                     </InputGroup>
                     {errors.email && (
-                        <Form.Control.Feedback
-                            type="invalid"
-                            className="d-block small mt-1"
-                        >
+                        <Form.Text className="text-danger small mt-1 d-block">
                             {errors.email}
-                        </Form.Control.Feedback>
+                        </Form.Text>
                     )}
                 </Form.Group>
 
@@ -117,7 +120,7 @@ export default function ResetPassword({ token, email }) {
                         New Password
                     </Form.Label>
                     <InputGroup>
-                        <InputGroup.Text className="bg-light border-end-0">
+                        <InputGroup.Text className="bg-light">
                             <Lock size={16} className="text-secondary" />
                         </InputGroup.Text>
                         <Form.Control
@@ -126,17 +129,14 @@ export default function ResetPassword({ token, email }) {
                             onChange={(e) =>
                                 setData("password", e.target.value)
                             }
-                            className="border-start-0 bg-light"
                             placeholder="Enter new password"
                             autoComplete="new-password"
-                            isFocused={true}
+                            autoFocus
                             isInvalid={!!errors.password}
                         />
                         <Button
-                            variant="link"
-                            className="bg-light border text-secondary text-decoration-none"
+                            variant="outline-secondary"
                             onClick={() => setShowPassword(!showPassword)}
-                            style={{ zIndex: 5 }}
                         >
                             {showPassword ? (
                                 <EyeSlash size={16} />
@@ -150,31 +150,27 @@ export default function ResetPassword({ token, email }) {
                     {data.password && (
                         <div className="mt-2">
                             <div className="d-flex justify-content-between align-items-center mb-1">
-                                <span className="small text-secondary">
+                                <Form.Text className="text-secondary">
                                     Password strength:
-                                </span>
-                                <span
-                                    className={`small text-${strength.variant} fw-semibold`}
+                                </Form.Text>
+                                <Form.Text
+                                    className={`text-${strength.variant} fw-semibold`}
                                 >
                                     {strength.text}
-                                </span>
+                                </Form.Text>
                             </div>
-                            <div className="progress" style={{ height: "4px" }}>
-                                <div
-                                    className={`progress-bar bg-${strength.variant}`}
-                                    style={{ width: `${strength.strength}%` }}
-                                />
-                            </div>
+                            <ProgressBar
+                                now={strength.strength}
+                                variant={strength.variant}
+                                style={{ height: "4px" }}
+                            />
                         </div>
                     )}
 
                     {errors.password && (
-                        <Form.Control.Feedback
-                            type="invalid"
-                            className="d-block small mt-1"
-                        >
+                        <Form.Text className="text-danger small mt-1 d-block">
                             {errors.password}
-                        </Form.Control.Feedback>
+                        </Form.Text>
                     )}
                 </Form.Group>
 
@@ -185,7 +181,7 @@ export default function ResetPassword({ token, email }) {
                         Confirm New Password
                     </Form.Label>
                     <InputGroup>
-                        <InputGroup.Text className="bg-light border-end-0">
+                        <InputGroup.Text className="bg-light">
                             <Lock size={16} className="text-secondary" />
                         </InputGroup.Text>
                         <Form.Control
@@ -194,18 +190,15 @@ export default function ResetPassword({ token, email }) {
                             onChange={(e) =>
                                 setData("password_confirmation", e.target.value)
                             }
-                            className="border-start-0 bg-light"
                             placeholder="Confirm new password"
                             autoComplete="new-password"
                             isInvalid={!!errors.password_confirmation}
                         />
                         <Button
-                            variant="link"
-                            className="bg-light border text-secondary text-decoration-none"
+                            variant="outline-secondary"
                             onClick={() =>
                                 setShowConfirmPassword(!showConfirmPassword)
                             }
-                            style={{ zIndex: 5 }}
                         >
                             {showConfirmPassword ? (
                                 <EyeSlash size={16} />
@@ -215,12 +208,9 @@ export default function ResetPassword({ token, email }) {
                         </Button>
                     </InputGroup>
                     {errors.password_confirmation && (
-                        <Form.Control.Feedback
-                            type="invalid"
-                            className="d-block small mt-1"
-                        >
+                        <Form.Text className="text-danger small mt-1 d-block">
                             {errors.password_confirmation}
-                        </Form.Control.Feedback>
+                        </Form.Text>
                     )}
 
                     {/* Password Match Indicator */}
@@ -309,46 +299,6 @@ export default function ResetPassword({ token, email }) {
                     256-bit encrypted password reset
                 </span>
             </div>
-
-            <style type="text/css">{`
-                .form-control:focus {
-                    border-color: #8B5CF6;
-                    box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25);
-                }
-                
-                .input-group-text {
-                    background-color: #f8f9fa;
-                }
-                
-                .btn-primary {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                }
-                
-                .btn-primary:hover {
-                    background-color: #7C3AED;
-                    border-color: #7C3AED;
-                }
-                
-                .btn-primary:disabled {
-                    background-color: #8B5CF6;
-                    border-color: #8B5CF6;
-                    opacity: 0.65;
-                }
-                
-                .btn-link {
-                    color: #6c757d;
-                }
-                
-                .btn-link:hover {
-                    color: #8B5CF6;
-                }
-                
-                .progress {
-                    background-color: #e9ecef;
-                    border-radius: 2px;
-                }
-            `}</style>
         </GuestLayout>
     );
 }
