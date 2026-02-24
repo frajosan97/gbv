@@ -51,7 +51,6 @@ class DashboardController extends Controller
         // } catch (\Exception $e) {
         //     // Fallback to empty collection if error
         // }
-
         // Return permissions based on role as fallback
         return match ($user->role) {
             User::ROLE_SUPER_ADMIN => collect(['*']), // All permissions
